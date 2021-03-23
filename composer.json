@@ -7,5 +7,10 @@
             "email": "328957143@qq.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Fjjreal\\Weather\\": "src/"
+        }
+    }
 }
