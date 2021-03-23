@@ -4,7 +4,7 @@ namespace Fjjreal\Weather;
 
 use Illuminate\Support\ServiceProvider;
 
-class WeatherServiceProvider extends ServiceProvider
+class WeatherManagerProvider extends ServiceProvider
 {
 
     protected $defer = true; // 延迟加载服务
@@ -16,8 +16,8 @@ class WeatherServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('weather', function ($app) {
-            return new Weather($app);
+        $this->app->singleton('WeatherManager', function ($app) {
+            return new WeatherManager($app);
         });
     }
 
@@ -41,7 +41,7 @@ class WeatherServiceProvider extends ServiceProvider
 
     public function provides()
     {
-        return ['weather'];
+        return ['WeatherManager'];
     }
 
 }

@@ -6,31 +6,31 @@
 
 namespace Fjjreal\Weather;
 
-
-use Illuminate\Config\Repository;
-use Illuminate\Session\SessionManager;
-
-class Weather
+class Weather extends BaseWeather
 {
 
-    /**
-     * @var Repository
-     */
-    protected $config;
+    public $app;
 
-    /**
-     * Weather constructor.
-     * @param Repository $config
-     */
-    public function __construct(Repository $config)
-
+    public function __construct($app)
     {
-        $this->config = $config;
+        $this->app = $app;
     }
 
-    public function test_rtn($msg = ''){
-        $config_arr = $this->config->get('weather.options');
-        return $msg.' <strong>from your custom develop package!</strong>>'.'-----'.$config_arr['default'].'----'.$config_arr['default2'];
+    public function current() : array
+    {
+        $configs = config('weather');
+        $configs['amap']['params']['extensions'] = "base";
+        $url = $configs['amap']['url'].http_build_query($configs['amap']['params']);
+        return $this->httpGet($url);
     }
+
+    public function forecast() : array
+    {
+        $configs = config('weather');
+        $configs['amap']['params']['extensions'] = "all";
+        $url = $configs['amap']['url'].http_build_query($configs['amap']['params']);
+        return $this->httpGet($url);
+    }
+
 
 }

@@ -7,18 +7,18 @@
 namespace Fjjreal\Weather\Facades;
 
 
+use Fjjreal\Weather\BaseWeather;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static array current()
- * @method static array forecast()
+ * @method static BaseWeather makeSP(array $configs)
  * Class Weather
  * @package Fjjreal\Weather\Facades
  */
-class Weather extends Facade
+class WeatherManager extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return "Weather";
+        return "WeatherManager";
     }
 }
